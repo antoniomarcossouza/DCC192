@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Nome</title>
+</head>
+
+<body>
+    <h1>Formulário de Nome</h1>
+
+    <p th:if="${logout}">Você saiu com sucesso!</p>
+
+    <form th:action="@{/menu}" method="GET">
+        <label for="name">Digite seu nome:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>
