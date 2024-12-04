@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captcha</title>
+</head>
+
+<body>
+    <h1>Captcha</h1>
+    <p th:if="${logout}">Você saiu com sucesso!</p>
+
+    <p th:text="'Digite o codigo: '+${senha}"></p>
+    <form th:action="@{/login}" method="get">
+        <input type="text" id="codigo" name="codigo" placeholder="seu codigo" required /><br />
+        <button class="btn_enviar" type="submit">Enviar</button>
+    </form>
+</body>
+
+</html>

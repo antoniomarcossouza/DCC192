@@ -10,8 +10,6 @@
 <body>
     <h1>Formulário de Nome</h1>
 
-    <p th:if="${logout}">Você saiu com sucesso!</p>
-
     <form th:action="@{/menu}" method="GET">
         <label for="name">Digite seu nome:</label>
         <input type="text" id="name" name="name" required>
