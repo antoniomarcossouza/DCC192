@@ -10,6 +10,8 @@
 <body>
     <h1>Formulário de Nome</h1>
 
+    <p th:if="${captcha_message}" th:text="${captcha_message}" />
+
     <form th:action="@{/menu}" method="GET">
         <label for="name">Digite seu nome:</label>
         <input type="text" id="name" name="name" required>

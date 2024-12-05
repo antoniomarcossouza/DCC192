@@ -9,6 +9,7 @@
 
 <body>
     <h1>Captcha</h1>
+    <p th:if="${captcha_message}" th:text="${captcha_message}" />
     <p th:if="${logout}">Você saiu com sucesso!</p>
 
     <p th:text="'Digite o codigo: '+${senha}"></p>

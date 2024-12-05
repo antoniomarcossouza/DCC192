@@ -1,5 +1,6 @@
 package edu.dcc192.projeto;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +14,32 @@ public class HomeController {
     private GeradorSenha senha;
 
     @GetMapping("/")
-    public ModelAndView captcha_home() {
+    public ModelAndView captcha_home(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("captcha");
-        mv.addObject("senha", senha.GerarSenha());
+        String senhaGerada = senha.GerarSenha();
+        session.setAttribute("senha", senhaGerada);
+        mv.addObject("senha", senhaGerada);
         return mv;
     }
 
     @GetMapping("login")
-    public ModelAndView login() {
+    public ModelAndView login(@RequestParam String codigo, HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("login");
+
+        String senhaGerada = (String) session.getAttribute("senha");
+
+        if (senhaGerada != null && senhaGerada.equals(codigo)) {
+            mv.setViewName("login");
+            mv.addObject("captcha_message", "Acesso permitido!");
+        } else {
+            mv.setViewName("captcha");
+            senhaGerada = senha.GerarSenha();
+            session.setAttribute("senha", senhaGerada);
+            mv.addObject("senha", senhaGerada);
+            mv.addObject("captcha_message", "Captcha Errado. Tente novamente.");
+        }
+
         return mv;
     }
 
