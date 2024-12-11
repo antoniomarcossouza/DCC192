@@ -56,11 +56,13 @@ public class HomeController {
     }
 
     @GetMapping("sair")
-    public ModelAndView captcha_logout() {
+    public ModelAndView captcha_logout(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("captcha");
+        String senhaGerada = senha.GerarSenha();
+        session.setAttribute("senha", senhaGerada);
+        mv.addObject("senha", senhaGerada);
         mv.addObject("logout", true);
-        mv.addObject("senha", senha.GerarSenha());
         return mv;
     }
 }
