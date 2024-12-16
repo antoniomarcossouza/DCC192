@@ -14,6 +14,13 @@ public class HomeController {
     private GeradorSenha senha;
 
     @GetMapping("/")
+    public ModelAndView home(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("index");
+        return mv;
+    }
+
+    @GetMapping("/captcha")
     public ModelAndView captcha_home(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("captcha");
