@@ -21,7 +21,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body class="mx-auto">
+<body class="mx-auto bg-dark">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">DCC192</a>
@@ -42,13 +42,16 @@
         </div>
         <br>
     </nav>
-    <div class="container vh-100 d-flex align-items-center">
-        <h1>Captcha</h1>
+    <div class="container">
+
+        <br>
+
         <div class="alert alert-danger" role="alert" th:if="${captcha_message}" th:text="${captcha_message}" />
         <div class="alert alert-success" role="alert" th:if="${logout}"> Você saiu com sucesso!</div>
 
+        <h1 class="text-light">Captcha</h1>
         <div>
-            <p th:text="'Digite o codigo: '+${senha}" class="form-label"></p>
+            <p th:text="'Digite o codigo: '+${senha}" class="form-label text-light"></p>
             <form th:action="@{/login}" method="get" class="input-group">
                 <input class="form-control" type="text" id="codigo" name="codigo" placeholder="Seu código" required />
                 <button class="btn btn-secondary" type="submit">Enviar</button>

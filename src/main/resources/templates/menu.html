@@ -21,7 +21,7 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body class="mx-auto">
+<body class="mx-auto bg-dark">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">DCC192</a>
@@ -44,7 +44,10 @@
     </nav>
 
     <div class="container">
-        <p th:text="'Olá, ' + ${userName} + '!'"></p>
+
+        <br>
+
+        <p th:text="'Olá, ' + ${userName} + '!'" class="text-light"></p>
 
         <form th:action="@{/sair}" method="get">
             <div>
