@@ -54,11 +54,25 @@ public class HomeController {
     private Dados dados;
 
     @GetMapping("menu")
-    public ModelAndView menu(@RequestParam String name) {
+    public ModelAndView menu(@RequestParam(required = false) String name, HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("menu");
+
+        if (name != null) {
+            session.setAttribute("userName", name);
+        } else {
+            name = (String) session.getAttribute("userName");
+        }
+
         mv.addObject("userName", name);
         mv.addObject("dados", dados.pegaDados());
+        return mv;
+    }
+
+    @GetMapping("info")
+    public ModelAndView menu() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("info");
         return mv;
     }
 
