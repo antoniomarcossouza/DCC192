@@ -1,11 +1,14 @@
 package edu.dcc192.projeto;
 
+import java.util.List;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomeController {
@@ -18,6 +21,29 @@ public class HomeController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
         return mv;
+    }
+
+    @Autowired
+    UsuarioRepository ur;
+
+    @GetMapping("/usuarios")
+    public ModelAndView usuarios() {
+        List<Usuario> lu = ur.findAll();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("usuarios");
+        mv.addObject("usuarios", lu);
+        return mv;
+    }
+
+    public class CreateUserEntity {
+        public String login;
+        public String senha;
+    }
+
+    @PostMapping("/addUsuarios")
+    public ModelAndView adicionaUsuarios(@RequestParam String login, @RequestParam String senha) {
+        ur.save(new Usuario(login, senha));
+        return usuarios();
     }
 
     @GetMapping("/captcha")

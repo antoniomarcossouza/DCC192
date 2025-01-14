@@ -38,7 +38,7 @@
                         <a class="nav-link" href="/captcha">Captcha</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/users">Usuários</a>
+                        <a class="nav-link" href="/usuarios">Usuários</a>
                     </li>
                 </ul>
             </div>
@@ -46,8 +46,16 @@
         <br>
     </nav>
     <div class="container">
-        <h1 class="text-light">Lista de Usuarios</h1>
-        <table border="1">
+        <br><br><br>
+        <h1 class="text-light">Cadastro de Usuários</h1>
+        <form th:action="@{/addUsuarios}" method="post" class="input-group">
+            <input class="form-control" type="text" id="login" name="login" placeholder="Login" required />
+            <input class="form-control" type="text" id="senha" name="senha" placeholder="Senha" required />
+            <button class="btn btn-secondary" type="submit">Enviar</button>
+        </form>
+        <br><br><br>
+        <h1 class="text-light">Lista de Usuários</h1>
+        <table class="table table-light table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
