@@ -37,6 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/captcha">Captcha</a>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -44,14 +45,13 @@
     </nav>
 
     <div class="container">
-
         <br>
-        <div class="alert alert-success" role="alert" th:if="${captcha_message}" th:text="${captcha_message}" />
+        <div class="alert alert-danger" role="alert" th:if="${login_msg}" th:text="${login_msg}" />
 
-        <h1 class="text-light">Formulário de Nome</h1>
-        <p for="name" class="form-label text-light">Digite seu nome:</p>
-        <form th:action="@{/menu}" method="GET" class="input-group">
-            <input type="text" id="name" name="name" class="form-control" required>
+        <h1 class="text-light">Formulário de Login</h1>
+        <form th:action="@{/usuarios}" method="GET" class="input-group">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome" required>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Sua senha" required>
             <button class="btn btn-secondary" type="submit">Enviar</button>
         </form>
 

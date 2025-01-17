@@ -37,6 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/captcha">Captcha</a>
                     </li>
+                    
                 </ul>
             </div>
         </div>
@@ -44,11 +45,36 @@
     </nav>
     <div class="container">
         <br>
-        <h1 class="text-light">Info</h1>
-        <p class="text-light">Imagine que tem muito texto aqui.</p>
-        <br>
-        <form th:action="@{/menu}" method="GET">
-            <button class="btn btn-info" type="submit">Info</button>
+        <p th:text="'Olá, ' + ${userName} + '!'" class="text-light"></p>
+
+        <br><br><br>
+        <h1 class="text-light">Cadastro de Usuários</h1>
+        <form th:action="@{/addUsuarios}" method="post" class="input-group">
+            <input class="form-control" type="text" id="login" name="login" placeholder="Login" required />
+            <input class="form-control" type="text" id="senha" name="senha" placeholder="Senha" required />
+            <button class="btn btn-secondary" type="submit">Enviar</button>
+        </form>
+        <br><br><br>
+        <h1 class="text-light">Lista de Usuários</h1>
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Login</th>
+                    <th>Senha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.login}"></td>
+                    <td th:text="${usuario.senha}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form th:action="@{/sair}" method="get">
+            <button class="btn btn-secondary" type="submit">Sair</button>
         </form>
     </div>
 </body>
