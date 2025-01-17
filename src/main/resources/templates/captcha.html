@@ -37,9 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/captcha">Captcha</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/usuarios">Usuários</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
@@ -47,12 +45,8 @@
     </nav>
 
     <div class="container">
-
         <br>
-
         <div class="alert alert-danger" role="alert" th:if="${captcha_message}" th:text="${captcha_message}" />
-        <div class="alert alert-success" role="alert" th:if="${logout}"> Você saiu com sucesso!</div>
-
         <h1 class="text-light">Captcha</h1>
         <div>
             <p th:text="'Digite o codigo: '+${senha}" class="form-label text-light"></p>

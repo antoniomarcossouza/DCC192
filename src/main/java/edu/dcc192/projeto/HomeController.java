@@ -27,23 +27,34 @@ public class HomeController {
     UsuarioRepository ur;
 
     @GetMapping("/usuarios")
-    public ModelAndView usuarios() {
-        List<Usuario> lu = ur.findAll();
+    public ModelAndView usuarios(@RequestParam(required = false) String name,
+            @RequestParam(required = false) String password, HttpSession session) {
+
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("usuarios");
-        mv.addObject("usuarios", lu);
+
+        if (name != null) {
+            session.setAttribute("userName", name);
+            session.setAttribute("userPassword", password);
+        }
+
+        List<Usuario> lu = ur.findAll();
+        if (lu.stream().anyMatch(
+                i -> i.getLogin().equals(session.getAttribute("userName"))
+                        && i.getSenha().equals(session.getAttribute("userPassword")))) {
+            mv.setViewName("usuarios");
+            mv.addObject("userName", session.getAttribute("userName"));
+            mv.addObject("usuarios", lu);
+        } else {
+            mv.setViewName("login");
+            mv.addObject("login_msg", "Usuário ou senha incorretos.");
+        }
         return mv;
     }
 
-    public class CreateUserEntity {
-        public String login;
-        public String senha;
-    }
-
     @PostMapping("/addUsuarios")
-    public ModelAndView adicionaUsuarios(@RequestParam String login, @RequestParam String senha) {
+    public String adicionaUsuarios(@RequestParam String login, @RequestParam String senha) {
         ur.save(new Usuario(login, senha));
-        return usuarios();
+        return "redirect:/usuarios";
     }
 
     @GetMapping("/captcha")
@@ -80,36 +91,16 @@ public class HomeController {
     private Dados dados;
 
     @GetMapping("menu")
-    public ModelAndView menu(@RequestParam(required = false) String name, HttpSession session) {
+    public ModelAndView menu() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("menu");
 
-        if (name != null) {
-            session.setAttribute("userName", name);
-        } else {
-            name = (String) session.getAttribute("userName");
-        }
-
-        mv.addObject("userName", name);
         mv.addObject("dados", dados.pegaDados());
         return mv;
     }
 
-    @GetMapping("info")
-    public ModelAndView menu() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("info");
-        return mv;
-    }
-
     @GetMapping("sair")
-    public ModelAndView captcha_logout(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("captcha");
-        String senhaGerada = senha.GerarSenha();
-        session.setAttribute("senha", senhaGerada);
-        mv.addObject("senha", senhaGerada);
-        mv.addObject("logout", true);
-        return mv;
+    public String captcha_logout(HttpSession session) {
+        return "redirect:/captcha";
     }
 }

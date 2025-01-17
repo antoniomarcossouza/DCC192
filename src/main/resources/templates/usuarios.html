@@ -37,15 +37,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/captcha">Captcha</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/usuarios">Usuários</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
         <br>
     </nav>
     <div class="container">
+        <br>
+        <p th:text="'Olá, ' + ${userName} + '!'" class="text-light"></p>
+
         <br><br><br>
         <h1 class="text-light">Cadastro de Usuários</h1>
         <form th:action="@{/addUsuarios}" method="post" class="input-group">
@@ -71,6 +72,10 @@
                 </tr>
             </tbody>
         </table>
+
+        <form th:action="@{/sair}" method="get">
+            <button class="btn btn-secondary" type="submit">Sair</button>
+        </form>
     </div>
 </body>
 

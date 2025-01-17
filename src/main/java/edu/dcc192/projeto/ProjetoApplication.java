@@ -11,9 +11,7 @@ public class ProjetoApplication {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ProjetoApplication.class, args);
 
 		UsuarioRepository rep = ctx.getBean(UsuarioRepository.class);
-		rep.save(new Usuario("ciro", "1234"));
-		rep.save(new Usuario("jose", "1234"));
-		rep.save(new Usuario("maria", "1234"));
+		rep.save(new Usuario("admin", "admin"));
 	}
 
 }
