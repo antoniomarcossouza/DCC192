@@ -1,5 +1,6 @@
 package edu.dcc192.projeto;
 
+import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,19 @@ public class HomeController {
     @GetMapping("sair")
     public String captcha_logout(HttpSession session) {
         return "redirect:/captcha";
+    }
+
+    @GetMapping("erroHtml")
+    public ModelAndView erroHtml() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("error");
+
+        mv.addObject("error", "Erro HTML!");
+        return mv;
+    }
+
+    @GetMapping("erroJava")
+    public String erroJava() throws Exception {
+        throw new IOException("Erro Java!");
     }
 }

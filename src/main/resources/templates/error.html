@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Erro no Sistema</title>
+</head>
+
+<body>
+    <h1>Erro no Sistema</h1>
+    <p>Por favor, contacte o suporte e informe o erro.</p>
+    <p th:text="'Mensagem de erro: ' + ${error}"></p>
+    <p>Clique <a href="/">aqui</a> pra voltar</p>
+</body>
+
+</html>
